@@ -1,6 +1,7 @@
 import java.util.Properties;
 import java.util.TimerTask;
 
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
@@ -15,5 +16,31 @@ import javax.mail.PasswordAuthentication;
 import java.util.TimerTask;
  
 public class SendTheEmail {
+  public void run(){
+	  try{
+		  
+	  Properties useProp = new Properties();
+	  useProp.put("mail.smtp.host", "yourExchangeEmail.lookitup.com");
+	  useProp.put("mail.smtp.host","587");
+	  useProp.put("mail.smtp.ssl.trust","yourExchangeEmail.lookitup.com");
+	  useProp.put("mail.smtp.auth","true");
+	  useProp.put("mail.smtp.connectiontimeout","10000");
+	  
+	  final String yourEmailUserId = "userid";
+	  final String yourEmailpwd = "password";
 
+	  Session sessionForEmail = Session.getInstance(useProp, new Authenticator() {
+	      protected PasswordAuthentication getPasswordAuthentication() {
+	         return new PasswordAuthentication(yourEmailUserId,yourEmailpwd);
+	     }
+	   });  
+	  
+	  
+	  sessionForEmail.setDebug(true);
+	  Message message = new MimeMessage(sessionForEmail);
+	  
+	  }catch(Exception e){
+		 
+	  }
+  }
 }
