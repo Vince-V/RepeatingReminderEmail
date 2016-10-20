@@ -38,6 +38,7 @@ public class SendTheEmail {
 	  
 	  sessionForEmail.setDebug(true);
 	  InternetAddress fromEmailAddress = new InternetAddress("someemailaddress@email.com","someemailaddress@email.com");
+	  InternetAddress toEmailAddress = new InternetAddress("someToemailaddress@email.com","someToemailaddress@email.com");
 	  
 	  String emailSubjectLine = "Teammates, don't forget to check that thing, and send report";
 	  String emailMessageBody = "Teammates, don't forget to check this link https://afdfsd.com. And send report if there's an issue";
@@ -45,8 +46,14 @@ public class SendTheEmail {
 	  Message message = new MimeMessage(sessionForEmail);
 	  message.setFrom(fromEmailAddress);
 	  
-	  }catch(Exception e){
-		 
-	  }
+	  Transport transportForEmail = sessionForEmail.getTransport("smtp");
+	  transportForEmail.connect();
+	  
+	  
+	  }catch(MessagingException me){
+		  System.out.println(me.getMessage()+ me.getStackTrace());		 
+	  }catch(UnsupportedEncodingException uee){
+		  System.out.println(uee.getMessage());		 
+	  }  
   }
 }

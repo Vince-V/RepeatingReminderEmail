@@ -10,6 +10,6 @@ public class ScheduleEmailTask extends TimerTask {
 	@Override
 	public void run() {
 		whatsTheDate = new Date();
-		System.out.println("The time is : " +whatsTheDate);
+		System.out.println("The current time is : " +whatsTheDate);
 	}
 }
